@@ -7,7 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-sky-500">
-    <p class="p-2 rounded-md text-sky-600 bg-white w-fit relative top-2 left-2">Waktu Tersisa: <span class="timer"></span></p>
+    <p class="p-2 rounded-md text-sky-600 bg-white w-fit relative top-2 left-2">
+      Waktu Tersisa: <span class="timer"></span>
+    </p>
     <form
       class="mx-auto w-2/3 text-center mt-[100px] items-center flex flex-col gap-4"
     >
@@ -89,10 +91,9 @@
           clearInterval(timeout);
           form.style.display = "none";
           timer.style.display = "none";
-          timer.parentElement.style.display = "none"
+          timer.parentElement.style.display = "none";
           scoreElement.classList.toggle("hidden");
           scoreElement.textContent = `Score kamu adalah: ${score * 10}`;
-
         }
         timer.textContent = time;
         time--;
@@ -111,7 +112,10 @@
           }
         } else {
           form.style.display = "none";
+          timer.style.display = "none";
+          timer.parentElement.style.display = "none";
           scoreElement.classList.toggle("hidden");
+          clearInterval(timeout);
           scoreElement.textContent = `Score kamu adalah: ${score * 10}`;
         }
         jawaban.forEach((jwb) => {
