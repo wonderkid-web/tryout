@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Handjet:wght@300&family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <style>
+    * {
+      font-family: "Poppins", sans-serif;
+    }
+    .checked{
+      border: solid;
+    }
+  </style>
+  <body class="bg-sky-500">
+      <div class="login w-1/2 mx-auto flex flex-col gap-4 my-[150px] text-white">
+        <h1 class="text-center text-2xl">Login di Form ini</h1>
+        <input type="text" class="w-2/4 text-sky-500 p-2 rounded-md mx-auto focus:outline-sky-700" placeholder="Username">
+        <input type="password" class="w-2/4 text-sky-500 p-2 rounded-md mx-auto focus:outline-sky-700" placeholder="Password">
+        <button class="text-white bg-sky-600 hover:bg-sky-700 w-2/4 mx-auto rounded-md p-2 hover:shadow-md">Login</button>
+      </div>
+
+ 
+  <script>
+    const btn = document.querySelector('button')
+    const username = document.querySelector('input[type="text"]')
+    const password = document.querySelector('input[type="password"]')
+
+
+    const loggin = () =>{
+      if(username.value == "kitakale"){
+        if(password.value == "kkc123"){
+          location.href = "soal.html"
+        }
+      }else{
+        alert('username atau password yang kamu masukin salah!!!')
+      }
+    }
+
+    btn.addEventListener('click', loggin)
+  </script>
+  </body>
+</html>

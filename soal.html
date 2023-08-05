@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website TryOut</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-sky-500">
+    <p class="timer"></p>
+    <form
+      class="mx-auto w-2/3 text-center mt-[100px] items-center flex flex-col gap-4"
+    >
+      <h1 class="bg-white w-fit p-3 rounded-md" id="soal"></h1>
+      <div class="box-jawaban flex flex-col items-start gap-4 w-2/3">
+        <div
+          class="jawaban p-2 rounded-md flex justify-between bg-white w-full"
+        >
+          <label for="_a" id="label_a"></label>
+          <input
+            class="default:ring-2 checked:w-5 bg-white active:border-yellow-500"
+            type="radio"
+            name="jwb"
+            id="_a"
+          />
+        </div>
+        <div
+          class="jawaban p-2 rounded-md flex justify-between bg-white w-full"
+        >
+          <label for="_b" id="label_b"></label>
+          <input class="checked:w-5" type="radio" name="jwb" id="_b" />
+        </div>
+        <div
+          class="jawaban p-2 rounded-md flex justify-between bg-white w-full"
+        >
+          <label for="_c" id="label_c"></label>
+          <input type="radio" class="checked:w-5" name="jwb" id="_c" />
+        </div>
+        <div
+          class="jawaban p-2 rounded-md flex justify-between bg-white w-full"
+        >
+          <label for="_d" id="label_d"></label>
+          <input class="checked:w-5" type="radio" name="jwb" id="_d" />
+        </div>
+      </div>
+      <button
+        class="bg-sky-600 w-2/3 py-1 text-white rounded-md hover:bg-sky-700 hover:shadow-md"
+        type="submit"
+      >
+        Pilih
+      </button>
+    </form>
+
+    <h1
+      class="mx-auto mt-[200px] bg-white w-fit p-4 rounded-md hidden"
+      id="score"
+    ></h1>
+
+    <script>
+      const timer = document.querySelector(".timer");
+      const soal = document.querySelector(".soal");
+      const jawaban = document.querySelectorAll(".jawaban");
+      const form = document.querySelector("form");
+      const scoreElement = document.querySelector("#score");
+      let score = 0;
+      let currIndex = 0;
+
+      const boxSoal = [
+        {
+          soal: "2 + 2 = 4",
+          jawaban: ["Benar", "Salah", "Ragu-ragu", "Ga tau"],
+          jawabanBenar: 0,
+        },
+        {
+          soal: "2 - 2 = 6",
+          jawaban: ["Benar1", "Salah2", "ragu-ragu2", "Ga tau"],
+          jawabanBenar: 1,
+        },
+        {
+          soal: "2 / 2 = 1",
+          jawaban: ["Benar3", "Salah3", "ragu-ragu3", "Ga Tau"],
+          jawabanBenar: 0,
+        },
+      ];
+
+      let time = 5;
+      const timeout = setInterval(() => {
+        if (time == 0) {
+          clearInterval(timeout);
+          form.style.display = "none";
+          timer.style.display = "none";
+          scoreElement.classList.toggle("hidden");
+          scoreElement.textContent = `Score kamu adalah: ${score * 10}`;
+
+        }
+        timer.textContent = time;
+        time--;
+      }, 1000);
+
+      const loadSoal = () => {
+        if (currIndex < boxSoal.length) {
+          let currSoal = boxSoal[currIndex];
+          this.soal.innerText = currSoal.soal;
+          for (const jwb in currSoal.jawaban) {
+            jawaban[jwb].children[0].innerText = "";
+            jawaban[jwb].children[1].value = "";
+
+            jawaban[jwb].children[0].innerText = currSoal.jawaban[jwb];
+            jawaban[jwb].children[1].value = jwb;
+          }
+        } else {
+          form.style.display = "none";
+          scoreElement.classList.toggle("hidden");
+          scoreElement.textContent = `Score kamu adalah: ${score * 10}`;
+        }
+        jawaban.forEach((jwb) => {
+          jwb.children[1].checked = false;
+        });
+      };
+
+      const onSubmit = (e) => {
+        e.preventDefault();
+
+        let radioTerpilih = document.querySelector('input[name="jwb"]:checked');
+        if (radioTerpilih) {
+          if (radioTerpilih.value == boxSoal[currIndex].jawabanBenar) {
+            score += 1;
+            console.log("score kamu nambah 1");
+            console.log("total score kamu sekarang: ", score);
+          }
+          currIndex++;
+        } else {
+          alert("kamu belum milih jawaban apapun!");
+        }
+        loadSoal();
+      };
+      form.addEventListener("submit", onSubmit);
+
+      loadSoal();
+    </script>
+  </body>
+</html>
